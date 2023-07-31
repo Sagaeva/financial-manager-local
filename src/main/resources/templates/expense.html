@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+
+        p {
+             text-align: center;
+             }
+        h1 {
+            color: #4B0082;
+            text-align: center;
+            color: white;
+            background-color: #4B0082;
+
+        }
+        h2 {
+            color: #4B0082;
+            text-align: left;
+
+        }
+
+
+        .expense-header {
+            width: 100%;
+        }
+        .expense {
+            width: 100%;
+        }
+        .expense, .expense th, .expense td {
+            border: 1px solid #4B0082;
+            border-collapse: collapse;
+        }
+        .expense th {
+            background-color: #4B0082;
+            color: white;
+        }
+        .total {
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+
+<h2 th:text="${user.name}"></h2>
+
+
+
+
+ <h1>Expenses</h1>
+
+<table class="expense">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>date</th>
+        <th>amount</th>
+    </tr>
+    <tr th:each="expense : ${expenses}">
+        <td th:text="${expense.name}"></td>
+        <td th:text="${expense.description}"></td>
+        <td th:text="${expense.dateString}"></td>
+        <td th:text="${expense.amount}"></td>
+    </tr>
+    <tr>
+        <td class="total" colspan="3"><b>Total</b></td>
+        <td><b th:text="${#aggregates.sum(expenses.![amount])}"></b></td>
+    </tr>
+</table>
+
+
+ <h1>Incomes</h1>
+ <table class="expense">
+     <tr>
+         <th>Name</th>
+         <th>Description</th>
+         <th>date</th>
+         <th>amount</th>
+     </tr>
+     <tr th:each="income : ${incomes}">
+         <td th:text="${income.name}"></td>
+         <td th:text="${income.description}"></td>
+         <td th:text="${income.dateString}"></td>
+         <td th:text="${income.amount}"></td>
+     </tr>
+     <tr>
+         <td class="total" colspan="3"><b>Total</b></td>
+         <td><b th:text="${#aggregates.sum(incomes.![amount])}"></b></td>
+     </tr>
+ </table>
+<footer class="py-5">
+    <div class="container">
+        <p>
+            Copyright &copy; Expenditure Control - 2022 Developed by Yana Sagaeva (sagaeva@gmail.com)
+        </p>
+    </div>
+</footer>
+
+
+</body>
+</html>
